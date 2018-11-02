@@ -45,12 +45,12 @@ void rt_hw_local_irq_enable(rt_base_t level);
 在多核系统中，考虑到高效率，自旋锁的底层实现和CPU体系密切相关，需要由libcpu/BSP来进行实现，需要实现以下定义及接口：
 
 ```c
-/* 底层自旋锁结构定义 */
-typedef struct {} rt_hw_spinlock_t;
+/* 底层自旋锁结构定义，例如 */
+typedef struct { rt_ubase_t lock } rt_hw_spinlock_t;
 
 /* 对自旋锁执行锁定操作 */
-void __rt_hw_spin_lock(rt_hw_spinlock_t*);
+void rt_hw_spin_lock(rt_hw_spinlock_t *spinlock);
 
 /* 对自旋锁执行解锁操作 */
-void __rt_hw_spin_unlock(rt_hw_spinlock_t*);
+void rt_hw_spin_unlock(rt_hw_spinlock_t *spinlock);
 ```
